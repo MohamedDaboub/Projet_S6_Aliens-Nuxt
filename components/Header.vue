@@ -3,7 +3,7 @@
         <a href="#content" class="sr-only focus:not-sr-only text-lg text-text"> Passez au contenu </a>
         <nav class=" lg:flex lg:justify-between items-center">
             <div class="flex justify-between items-center">
-                <RouterLink to="/"><img src="./assets/icon_svg/logo-site.svg" class="w-32 p-4" alt="Logo du site"></RouterLink>
+                <!-- <RouterLink to="/"><img src="./assets/icon_svg/logo-site.svg" class="w-32 p-4" alt="Logo du site"></RouterLink> -->
                 <span class="text-3xl cursor-pointer lg:hidden block w-8 h-8 mx-4  ">
                     <MenuIcon class=" text-text"  aria-controls="menu"
                     :aria-expanded="menuOuvert"
