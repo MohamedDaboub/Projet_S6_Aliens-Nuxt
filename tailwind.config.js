@@ -17,8 +17,7 @@ module.exports = {
           "4xl": "5rem",
         },
         fontFamily: {
-          poppins: "Poppins",
-          Lato: "Lato",
+          Orbitron: "Orbitron",
         },
         boxShadow: {
           EFFET: "0px 0px 10px 0px rgba(255,255,255,0.75)",
