@@ -9,12 +9,13 @@ module.exports = {
           "Marron-F": "linear-gradient(to bottom, #000 7.6%, #09195a 100%)",
         },
         fontSize: {
+          xs: "0.75rem",
           base: "1rem",
           lg: "1.25rem",
           xl: "1.5625rem",
           "2xl": "1.875rem",
-          "3xl": "2.1875rem",
-          "4xl": "5rem",
+          "3xl": "3rem",
+          "4xl": "4rem",
         },
         fontFamily: {
           Orbitron: "Orbitron",
@@ -34,15 +35,6 @@ module.exports = {
       },
     },
     plugins: [
-      function ({ addUtilities }) {
-        const newUtilities = {
-          '.gradient-marron-f': {
-            background: 'linear-gradient(to bottom, #000 7.6%, #09195a 100%)',
-          },
-        };
-    
-        addUtilities(newUtilities, ['responsive', 'hover']);
-      },
     ],
   };
 
