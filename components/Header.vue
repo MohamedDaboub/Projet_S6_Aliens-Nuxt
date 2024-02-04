@@ -90,7 +90,7 @@ const closeMobileMenu = () => {
     width: 100%;
     height: 100%;
     opacity: 0.2;
-    background-image: url('/img/Spance_Header.webp');
+    background-image: url('/img/Space_Header.webp');
     background-size: cover;
     background-position: center;
     z-index: -10;

@@ -53,6 +53,17 @@ const translateHex = (hex) => {
   }
   return str;
 };
+
+
+const menuOuvert = ref(false);
+
+const toggleMobileMenu = () => {
+  menuOuvert.value = !menuOuvert.value;
+};
+
+const closeMobileMenu = () => {
+  menuOuvert.value = false;
+};
 </script>
 
 <template>
@@ -125,22 +136,22 @@ const translateHex = (hex) => {
       <button @click="translateText" class="text-base">{{ isTranslated ? 'Revenir à l\'hexa' : 'Traduire le texte' }}</button>
     </section>
     <section class="text-white text-center my-10">
-      <h2 class="lg:text-2xl text-lg">{{ isTranslated ? translateHex('54696d65206265666f722077652061727269766520746f204561727468') : '54696d65206265666f722077652061727269766520746f204561727468' }}</h2>
+      <h2 class="lg:text-2xl text-lg hex-text">{{ isTranslated ? translateHex('54696d65206265666f722077652061727269766520746f204561727468') : '54696d65206265666f722077652061727269766520746f204561727468' }}</h2>
       <div class="grid grid-cols-2 lg:grid-cols-4 text-center justify-center my-10">
         <div>
-          <h3 class="lg:text-2xl text-lg my-2">{{ isTranslated ? translateHex('44617973') : '44617973' }}</h3>
+          <h3 class="lg:text-2xl text-lg my-2 hex-text">{{ isTranslated ? translateHex('44617973') : '44617973' }}</h3>
           <span class="lg:text-3xl text-base">{{ countdown.days }}</span>
         </div>
-        <div>
-          <h3 class="lg:text-2xl text-lg my-2">{{ isTranslated ? translateHex('486f757273') : '486f757273' }}</h3>
+        <div> 
+          <h3 class="lg:text-2xl text-lg my-2 hex-text">{{ isTranslated ? translateHex('486f757273') : '486f757273' }}</h3>
           <span class="lg:text-3xl text-base">{{ countdown.hours }}</span>
         </div>
         <div>
-          <h3 class="lg:text-2xl text-lg my-2">{{ isTranslated ? translateHex('4d696e75746573') : '4d696e75746573' }}</h3>
+          <h3 class="lg:text-2xl text-lg my-2 hex-text">{{ isTranslated ? translateHex('4d696e75746573') : '4d696e75746573' }}</h3>
           <span class="lg:text-3xl text-base">{{ countdown.minutes }}</span>
         </div>
         <div>
-          <h3 class="lg:text-2xl text-lg my-2">{{ isTranslated ? translateHex('5365636f6e6473') : '5365636f6e6473' }}</h3>
+          <h3 class="lg:text-2xl text-lg my-2 hex-text">{{ isTranslated ? translateHex('5365636f6e6473') : '5365636f6e6473' }}</h3>
           <span class="lg:text-3xl text-base">{{ countdown.seconds }}</span>
         </div>
       </div>
@@ -154,7 +165,7 @@ const translateHex = (hex) => {
   word-break: break-all;
 }
 .Hero{
-    background-image: url('/img/Spance_Aliens.webp');
+    background-image: url('/img/Space_Aliens.webp');
     background-size: cover;
     background-position: center;
     width: 100%;
@@ -236,7 +247,7 @@ button:active {
     width: 100%;
     height: 100%;
     opacity: 0.2;
-    background-image: url('/img/Spance_Header.webp');
+    background-image: url('/img/Space_Header.webp');
     background-size: cover;
     background-position: center;
     z-index: -10;
