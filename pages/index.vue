@@ -30,46 +30,129 @@ onMounted(() => {
 onBeforeUnmount(() => {
     clearInterval(countdownInterval);
 });
+
+
+const hexText = ref("4772656574696e67732c2045617274686d616e2e204920616d205a61726e616b2c2066726f6d2074686520706c616e65742058796c6f722e2057652077696c6c20736f6f6e20617272697665206f6e20456172746820746f2065737461626c69736820706561636566756c20636f6e746163742e");
+const translatedText = ref(null);
+const isTranslated = ref(false);
+
+const translateText = () => {
+  if (isTranslated.value) {
+    translatedText.value = null;
+  } else {
+    translatedText.value = translateHex(hexText.value);
+  }
+  isTranslated.value = !isTranslated.value;
+};
+
+const translateHex = (hex) => {
+  let str = '';
+  for (let i = 0; i < hex.length; i += 2) {
+    const char = String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+    str += char;
+  }
+  return str;
+};
 </script>
 
 <template>
-    <Header/>
-    <Backtop/>
+  <div>
+    <div class="">
+  <header class="gradient-marron-f sticky top-0">
+    <div class="flex flex-wrap justify-between items-center p-2">
+      <RouterLink to="/" class="flex items-center">
+        <img src='/img/Logo.png' class=" w-24 p-2" alt="Logo du site">
+      </RouterLink>
+      <nav class="hidden md:flex items-center">
+        <ul class="flex space-x-2">
+          <li>
+            <router-link to="/" class="text-white   focus:ring-4 focus:ring-primary-300 font-bold rounded-lg text-base px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none" aria-current="page">{{ isTranslated ? translateHex('486f6d65') : '486f6d65' }}</router-link>
+          </li>
+          <li>
+            <router-link to="/aliens" class="text-white   focus:ring-4 focus:ring-primary-300 font-bold rounded-lg text-base px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">{{ isTranslated ? translateHex('416c69656e73') : '416c69656e73' }}</router-link>
+          </li>
+          <li>
+            <router-link to="/aliens" class="text-white   focus:ring-4 focus:ring-primary-300 font-bold rounded-lg text-base px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">{{ isTranslated ? translateHex('416c69656e73') : '416c69656e73' }}</router-link>
+          </li>
+          <li>
+            <router-link to="/aliens" class="text-white   focus:ring-4 focus:ring-primary-300 font-bold rounded-lg text-base px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">{{ isTranslated ? translateHex('416c69656e73') : '416c69656e73' }}</router-link>
+          </li>
+        </ul>
+      </nav>
+      <div class="flex md:hidden items-center lg:order-2">
+        <button
+          v-directive:click-outside="closeMobileMenu"
+          data-collapse-toggle="mobile-menu"
+          type="button"
+          class=""
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+          @click="toggleMobileMenu"
+        >
+          <span class="sr-only">Open main menu</span>
+          <svg class="w-6 h-6" fill="#fff" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+          </svg>
+          <svg v-if="menuOuvert" class="hidden w-6 h-6" fill="#fff" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+  <nav v-if="menuOuvert" class="md:hidden z-10  w-full h-full border-gray-200 px-4 py-2.5 transition-transform transform">
+    <ul class="flex flex-col mt-4 font-medium justify-center text-white text-center my-10 bg-dark-blue">
+      <li class="my-5">
+        <nuxt-link to="/" class="nav-link" aria-current="page">486f6d65</nuxt-link>
+      </li>
+      <li class="my-5">
+        <router-link to="/aliens" class="nav-link">416c69656e73</router-link>
+      </li>
+      <li class="my-5">
+        <router-link to="/aliens" class="nav-link">416c69656e73</router-link>
+      </li>
+      <li class="my-5">
+        <router-link to="/aliens" class="nav-link">416c69656e73</router-link>
+      </li>
+    </ul>
+  </nav>
+</div>
+    <Backtop />
     <section class="Hero text-white">
-        <div>
-            <p>Salutations, Terrien. Je suis Zarnak, de la planète Xylor. Nous arrivons bientôt sur Terre pour établir un contact pacifique.</p>
-            <p>Salutations, Terrien. Je suis Zarnak, de la planète Xylor. Nous arrivons bientôt sur Terre pour établir un contact pacifique.</p>
-            <p>Salutations, Terrien. Je suis Zarnak, de la planète Xylor. Nous arrivons bientôt sur Terre pour établir un contact pacifique.</p>
-            <p>Salutations, Terrien. Je suis Zarnak, de la planète Xylor. Nous arrivons bientôt sur Terre pour établir un contact pacifique.</p>
-            <p>Salutations, Terrien. Je suis Zarnak, de la planète Xylor. Nous arrivons bientôt sur Terre pour établir un contact pacifique.</p>
-            <p>Salutations, Terrien. Je suis Zarnak, de la planète Xylor. Nous arrivons bientôt sur Terre pour établir un contact pacifique.</p>
-        </div>
-        <!-- <button class="text-base"> 547261647569726520746f7574206c652073697465</button> -->
+      <div>
+        <p class="hex-text">{{ isTranslated ? translatedText : hexText }}</p>
+      </div>
+      <button @click="translateText" class="text-base">{{ isTranslated ? 'Revenir à l\'hexa' : 'Traduire le texte' }}</button>
     </section>
     <section class="text-white text-center my-10">
-        <h2 class="lg:text-3xl text-lg">Time befor we arrive to Earth</h2>
-        <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-0 text-center justify-center my-10">
-            <div>
-                <h3 class="lg:text-3xl text-lg my-2">Days</h3>
-                <span class="lg:text-4xl text-base">{{ countdown.days }}</span>
-            </div>
-            <div>
-                <h3 class="lg:text-3xl text-lg my-2">Hours</h3>
-                <span class="lg:text-4xl text-base">{{ countdown.hours }}</span>
-            </div>
-            <div>
-                <h3 class="lg:text-3xl text-lg my-2">Minutes</h3>
-                <span class="lg:text-4xl text-base">{{ countdown.minutes }}</span>
-            </div>
-            <div>
-                <h3 class="lg:text-3xl text-lg my-2">Seconds</h3>
-                <span class="lg:text-4xl text-base">{{ countdown.seconds }}</span>
-            </div>
+      <h2 class="lg:text-2xl text-lg">{{ isTranslated ? translateHex('54696d65206265666f722077652061727269766520746f204561727468') : '54696d65206265666f722077652061727269766520746f204561727468' }}</h2>
+      <div class="grid grid-cols-2 lg:grid-cols-4 text-center justify-center my-10">
+        <div>
+          <h3 class="lg:text-2xl text-lg my-2">{{ isTranslated ? translateHex('44617973') : '44617973' }}</h3>
+          <span class="lg:text-3xl text-base">{{ countdown.days }}</span>
         </div>
+        <div>
+          <h3 class="lg:text-2xl text-lg my-2">{{ isTranslated ? translateHex('486f757273') : '486f757273' }}</h3>
+          <span class="lg:text-3xl text-base">{{ countdown.hours }}</span>
+        </div>
+        <div>
+          <h3 class="lg:text-2xl text-lg my-2">{{ isTranslated ? translateHex('4d696e75746573') : '4d696e75746573' }}</h3>
+          <span class="lg:text-3xl text-base">{{ countdown.minutes }}</span>
+        </div>
+        <div>
+          <h3 class="lg:text-2xl text-lg my-2">{{ isTranslated ? translateHex('5365636f6e6473') : '5365636f6e6473' }}</h3>
+          <span class="lg:text-3xl text-base">{{ countdown.seconds }}</span>
+        </div>
+      </div>
     </section>
+  </div>
 </template>
 
 <style  scoped>
+.hex-text {
+  white-space: pre-line;
+  word-break: break-all;
+}
 .Hero{
     background-image: url('/img/Spance_Aliens.webp');
     background-size: cover;
@@ -77,7 +160,6 @@ onBeforeUnmount(() => {
     width: 100%;
     height: 86vh;
 }
-/* Responsive Styles for Mobile Screens */
 @media (max-width: 767px) {
     .Hero {
         height: auto;
@@ -140,4 +222,23 @@ button:active {
   background: linear-gradient(32deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
 }
 
+.gradient-marron-f {
+    background: linear-gradient(to bottom, #000 7.6%, #09195a 100%);
+    position: relative;
+    z-index: 0;
+    border-bottom: #070B1E 2px solid;
+}
+.gradient-marron-f::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    background-image: url('/img/Spance_Header.webp');
+    background-size: cover;
+    background-position: center;
+    z-index: -10;
+}
 </style>
