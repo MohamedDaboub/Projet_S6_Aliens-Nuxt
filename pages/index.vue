@@ -34,6 +34,7 @@ onBeforeUnmount(() => {
 
 <template>
     <Header/>
+    <Backtop/>
     <section class="Hero text-white">
         <div>
             <p>Salutations, Terrien. Je suis Zarnak, de la planète Xylor. Nous arrivons bientôt sur Terre pour établir un contact pacifique.</p>

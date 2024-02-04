@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="">
   <header class="gradient-marron-f sticky top-0">
     <div class="flex flex-wrap justify-between items-center p-2">
       <RouterLink to="/" class="flex items-center">
@@ -42,18 +42,18 @@
       </div>
     </div>
   </header>
-  <nav v-if="menuOuvert" class="lg:hidden bg-white border-gray-200 px-4 py-2.5 dark:bg-gray-800">
-    <ul class="flex flex-col mt-4 font-medium">
-      <li>
+  <nav v-if="menuOuvert" class="md:hidden z-10  w-full h-full border-gray-200 px-4 py-2.5 transition-transform transform">
+    <ul class="flex flex-col mt-4 font-medium justify-center text-white text-center my-10 bg-dark-blue">
+      <li class="my-5">
         <nuxt-link to="/" class="nav-link" aria-current="page">Home</nuxt-link>
       </li>
-      <li>
+      <li class="my-5">
         <router-link to="/aliens" class="nav-link">Aliens</router-link>
       </li>
-      <li>
+      <li class="my-5">
         <router-link to="/aliens" class="nav-link">Aliens</router-link>
       </li>
-      <li>
+      <li class="my-5">
         <router-link to="/aliens" class="nav-link">Aliens</router-link>
       </li>
     </ul>

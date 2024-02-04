@@ -7,6 +7,8 @@ module.exports = {
       extend: {
         colors: {
           "Marron-F": "linear-gradient(to bottom, #000 7.6%, #09195a 100%)",
+          "dark-blue": "#09195a",
+          "light-blue": "#0E2373",
         },
         fontSize: {
           xs: "0.75rem",
