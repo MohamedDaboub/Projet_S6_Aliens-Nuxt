@@ -9,6 +9,7 @@ body {
   font-family: 'Orbitron', sans-serif;
   position: relative;
   background-color: #070B1E;
+  color: #fff;
 }
 
 body::before {
