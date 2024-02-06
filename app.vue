@@ -1,8 +1,39 @@
 <template>
   <div>
-    <NuxtPage/>
+    <!-- Overlay avec le GIF de chargement -->
+    <div v-if="isLoading" class="loading-overlay">
+      <img src="/img/Space_Loading.gif" alt="Loading..." />
+    </div>
+    
+    <!-- Contenu principal de la page -->
+    <div v-if="!isLoading">
+      <NuxtPage/>
+    </div>
   </div>
 </template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+
+const isLoading = ref(true);
+
+onMounted(() => {
+  if (process.client) {
+    const hasLoadingBeenShown = localStorage.getItem('hasLoadingBeenShown');
+    if (!hasLoadingBeenShown) {
+      setTimeout(() => {
+        isLoading.value = false;
+        localStorage.setItem('hasLoadingBeenShown', 'true');
+      }, 2000);
+    } else {
+      isLoading.value = false;
+    }
+  } else {
+    isLoading.value = false;
+  }
+});
+</script>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
 body {
@@ -19,11 +50,15 @@ body::before {
   right: 0;
   bottom: 0;
   left: 0;
-  background-image: url('img/Space_Background.webp'); /* Utilisez le chemin réel vers votre image de fond */
-  background-size: cover; /* Ajustez la taille de l'image de fond pour couvrir tout le corps */
-  background-position: center; /* Centrez l'image de fond */
-  background-repeat: no-repeat; /* Assurez-vous que l'image de fond ne se répète pas */
-  opacity: 0.15; /* Ajoutez une opacité de 20% à l'image de fond */
-  z-index: -100; /* Placez l'image de fond derrière le contenu du corps */
+  background-image: url('img/Space_Background.webp'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; 
+  opacity: 0.15; 
+  z-index: -100; 
+}
+.loading-overlay img {
+  width: 100%;
+  height: 100dvh;
 }
 </style>
