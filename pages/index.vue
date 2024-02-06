@@ -76,12 +76,12 @@ const closeMobileMenu = () => {
 </script>
 
 <template>
-  <div>
-    <div class=" sticky top-0">
-      <header class="gradient-marron-f ">
+
+    <div class=" sticky top-0 z-10">
+      <header class=" gradient-marron-f  ">
         <div class="flex flex-wrap justify-between items-center p-2">
           <RouterLink to="/" class="flex items-center">
-            <img src='/img/Logo.png' class=" w-24 p-2" alt="Logo du site">
+            <img src='/img/Space_Logo.svg' class=" w-20 p-2" alt="Logo du site">
           </RouterLink>
           <nav class="hidden md:flex items-center">
             <ul class="flex space-x-2">
@@ -100,7 +100,7 @@ const closeMobileMenu = () => {
             </ul>
           </nav>
           <div class="flex md:hidden items-center lg:order-2">
-            <button
+            <i
               v-directive:click-outside="closeMobileMenu"
               data-collapse-toggle="mobile-menu"
               type="button"
@@ -116,72 +116,60 @@ const closeMobileMenu = () => {
               <svg v-if="menuOuvert" class="hidden w-6 h-6" fill="#fff" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
               </svg>
-            </button>
+            </i>
           </div>
         </div>
-        <nav v-if="menuOuvert" class="md:hidden z-10  w-full h-full border-gray-200 px-4 py-2.5 transition-transform transform">
-          <ul class="flex flex-col mt-4 font-medium justify-center text-white text-center my-10 bg-dark-blue">
+        <nav v-if="menuOuvert" class="md:hidden   w-full h-full border-gray-200 px-4 py-2.5 transition-transform transform  ">
+          <ul class="flex flex-col mt-4 z-10 font-medium justify-center text-white text-center my-10 bg-dark-blue">
             <li class="my-5">
-              <nuxt-link to="/" class="nav-link" aria-current="page">486f6d65</nuxt-link>
+              <router-link to="/aliens" class="nav-link">{{ isTranslated ? translateHex('486f6d65') : '486f6d65' }}</router-link>
             </li>
             <li class="my-5">
-              <router-link to="/aliens" class="nav-link">416c69656e73</router-link>
+              <router-link to="/aliens" class="nav-link">{{ isTranslated ? translateHex('416c69656e73') : '416c69656e73' }}</router-link>
             </li>
             <li class="my-5">
-              <router-link to="/aliens" class="nav-link">416c69656e73</router-link>
-            </li>
-            <li class="my-5">
-              <router-link to="/aliens" class="nav-link">416c69656e73</router-link>
+              <router-link to="/aliens" class="nav-link">{{ isTranslated ? translateHex('416c69656e73') : '416c69656e73' }}</router-link>
             </li>
           </ul>
         </nav>
       </header>
     </div>
     <Backtop />
-    <section class="Hero text-white">
-      <div>
-        <p class="hex-text">{{ isTranslated ? translatedText : hexText }}</p>
+    <section class="Hero text-white  text-center justify-center   ">
+      <div class="md:max-w-3xl max-w-5xl pt-10 md:pt-32 lg:pt-52 m-auto pb-2 ">
+        <h1 :class="{ 'hex-text': !isTranslated } " class="md:text-lg text-base py-2 mx-1 font-bold">{{ isTranslated ? translatedText : hexText }}</h1>
+        <h3 :class="{ 'hex-text': !isTranslated } " class="md:text-lg text-base py-2 mx-1 font-bold">{{ isTranslated ? translateHex('576520636f6d6520696e2070656163652c2062757420796f7572207072657061726174696f6e20697320657373656e7469616c2e204372756369616c20696e666f726d6174696f6e2077696c6c20666f6c6c6f772e205072657061726520666f72206f7572206d656574696e67') : '576520636f6d6520696e2070656163652c2062757420796f7572207072657061726174696f6e20697320657373656e7469616c2e204372756369616c20696e666f726d6174696f6e2077696c6c20666f6c6c6f772e205072657061726520666f72206f7572206d656574696e67' }}</h3>
       </div>
-      <button @click="translateText" v-show="!isTranslated" class="text-base">5472616475697265206c65207465787465</button>
+      <div>
+        <button :class="{ 'hex-text': !isTranslated } " @click="translateText" v-show="!isTranslated" class="text-xs my-3">5472616475697265206c65207465787465</button>
+        <button v-show="isTranslated" class="text-xs my-3 font-bold">Savoir Dz</button>
+      </div>
     </section>
-    <section class="text-white text-center my-10">
-      <h2 class="lg:text-2xl text-lg">{{ isTranslated ? translateHex('54696d65206265666f722077652061727269766520746f204561727468') : '54696d65206265666f722077652061727269766520746f204561727468' }}</h2>
-      <div class="grid grid-cols-2 lg:grid-cols-4 text-center justify-center my-10">
+    <section class="text-white text-center my-10 ">
+      <h2 :class="{ 'hex-text': !isTranslated } " class="lg:text-2xl text-lg md:font-bold">{{ isTranslated ? translateHex('54696d65206265666f722077652061727269766520746f204561727468') : '54696d65206265666f722077652061727269766520746f204561727468' }}</h2>
+      <div class="grid grid-cols-2 lg:grid-cols-4 text-center justify-center my-10 max-w-4xl m-auto">
         <div>
-          <h3 class="lg:text-2xl text-lg my-2">{{ isTranslated ? translateHex('44617973') : '44617973' }}</h3>
+          <h3 :class="{ 'hex-text': !isTranslated } " class="lg:text-2xl text-lg my-2 md:font-bold">{{ isTranslated ? translateHex('44617973') : '44617973' }}</h3>
           <span class="lg:text-3xl text-base">{{ countdown.days }}</span>
         </div>
         <div>
-          <h3 class="lg:text-2xl text-lg my-2">{{ isTranslated ? translateHex('486f757273') : '486f757273' }}</h3>
+          <h3 :class="{ 'hex-text': !isTranslated } " class="lg:text-2xl text-lg my-2 md:font-bold">{{ isTranslated ? translateHex('486f757273') : '486f757273' }}</h3>
           <span class="lg:text-3xl text-base">{{ countdown.hours }}</span>
         </div>
         <div>
-          <h3 class="lg:text-2xl text-lg my-2">{{ isTranslated ? translateHex('4d696e75746573') : '4d696e75746573' }}</h3>
+          <h3 :class="{ 'hex-text': !isTranslated } " class="lg:text-2xl text-lg my-2 md:font-bold">{{ isTranslated ? translateHex('4d696e75746573') : '4d696e75746573' }}</h3>
           <span class="lg:text-3xl text-base">{{ countdown.minutes }}</span>
         </div>
         <div>
-          <h3 class="lg:text-2xl text-lg my-2">{{ isTranslated ? translateHex('5365636f6e6473') : '5365636f6e6473' }}</h3>
+          <h3 :class="{ 'hex-text': !isTranslated } " class="lg:text-2xl text-lg my-2 md:font-bold">{{ isTranslated ? translateHex('5365636f6e6473') : '5365636f6e6473' }}</h3>
           <span class="lg:text-3xl text-base">{{ countdown.seconds }}</span>
         </div>
       </div>
     </section>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et possimus sequi minima explicabo non officiis aliquam hic quia nesciunt odit, sapiente quisquam necessitatibus id quod repellat, praesentium odio voluptate consequuntur?</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et possimus sequi minima explicabo non officiis aliquam hic quia nesciunt odit, sapiente quisquam necessitatibus id quod repellat, praesentium odio voluptate consequuntur?</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et possimus sequi minima explicabo non officiis aliquam hic quia nesciunt odit, sapiente quisquam necessitatibus id quod repellat, praesentium odio voluptate consequuntur?</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et possimus sequi minima explicabo non officiis aliquam hic quia nesciunt odit, sapiente quisquam necessitatibus id quod repellat, praesentium odio voluptate consequuntur?</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et possimus sequi minima explicabo non officiis aliquam hic quia nesciunt odit, sapiente quisquam necessitatibus id quod repellat, praesentium odio voluptate consequuntur?</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et possimus sequi minima explicabo non officiis aliquam hic quia nesciunt odit, sapiente quisquam necessitatibus id quod repellat, praesentium odio voluptate consequuntur?</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et possimus sequi minima explicabo non officiis aliquam hic quia nesciunt odit, sapiente quisquam necessitatibus id quod repellat, praesentium odio voluptate consequuntur?</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et possimus sequi minima explicabo non officiis aliquam hic quia nesciunt odit, sapiente quisquam necessitatibus id quod repellat, praesentium odio voluptate consequuntur?</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et possimus sequi minima explicabo non officiis aliquam hic quia nesciunt odit, sapiente quisquam necessitatibus id quod repellat, praesentium odio voluptate consequuntur?</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et possimus sequi minima explicabo non officiis aliquam hic quia nesciunt odit, sapiente quisquam necessitatibus id quod repellat, praesentium odio voluptate consequuntur?</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et possimus sequi minima explicabo non officiis aliquam hic quia nesciunt odit, sapiente quisquam necessitatibus id quod repellat, praesentium odio voluptate consequuntur?</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et possimus sequi minima explicabo non officiis aliquam hic quia nesciunt odit, sapiente quisquam necessitatibus id quod repellat, praesentium odio voluptate consequuntur?</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et possimus sequi minima explicabo non officiis aliquam hic quia nesciunt odit, sapiente quisquam necessitatibus id quod repellat, praesentium odio voluptate consequuntur?</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et possimus sequi minima explicabo non officiis aliquam hic quia nesciunt odit, sapiente quisquam necessitatibus id quod repellat, praesentium odio voluptate consequuntur?</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et possimus sequi minima explicabo non officiis aliquam hic quia nesciunt odit, sapiente quisquam necessitatibus id quod repellat, praesentium odio voluptate consequuntur?</p>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Et possimus sequi minima explicabo non officiis aliquam hic quia nesciunt odit, sapiente quisquam necessitatibus id quod repellat, praesentium odio voluptate consequuntur?</p>
-  </div>
+    <section>
+      
+    </section>
+
 </template>
 
 <style  scoped>
@@ -189,17 +177,25 @@ const closeMobileMenu = () => {
   white-space: pre-line;
   word-break: break-all;
 }
+/* mobile */
+@media (max-width: 767px) {
+  .hex-text {
+  white-space: pre-line;
+  word-break: break-all;
+  font-size: 10px;
+}
+}
 .Hero{
     background-image: url('/img/Space_Aliens.webp');
     background-size: cover;
     background-position: center;
     width: 100%;
-    height: 86vh;
+    height: 86dvh;
 }
 @media (max-width: 767px) {
     .Hero {
         height: auto;
-        height: 100%;
+        height: 45dvh;
     }
 }
 button {
@@ -210,12 +206,10 @@ button {
   font-family: inherit;
   cursor: pointer;
   color: #fff;
-  /* width: 9em; */
   padding: 1rem;
-  /* height: 3em; */
   line-height: 2em;
   text-align: center;
-  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  background: linear-gradient(45deg, #1043F8, #A7347A);
   background-size: 300%;
   border-radius: 30px;
   z-index: 1;
@@ -245,6 +239,7 @@ button:before {
   bottom: -5px;
   z-index: -1;
   background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  /* background: linear-gradient(0deg, #1043F8, #A7347A); */
   background-size: 400%;
   border-radius: 35px;
   transition: 1s;
@@ -255,7 +250,8 @@ button:hover::before {
 }
 
 button:active {
-  background: linear-gradient(32deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  background: linear-gradient(0deg, #1043F8, #A7347A);
+  /* background: linear-gradient(32deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4); */
 }
 
 .gradient-marron-f {
