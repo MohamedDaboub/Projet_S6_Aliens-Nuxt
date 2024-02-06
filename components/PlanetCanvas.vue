@@ -5,7 +5,7 @@ import { ref, onMounted, onBeforeUnmount,onUpdated } from 'vue';
 import * as THREE from 'three';
 
 const canvas = ref(null);
-const Planet = ref(null);
+const Montre = ref(null);
 var controls = null;
 var clock = new THREE.Clock();
 let scene = null;
@@ -50,8 +50,8 @@ const initScene = () => {
     controls.dampingFactor = 0.25;
     controls.screenSpacePanning = false;
     controls.maxPolarAngle = Math.PI / 2;
-    // controls.minDistance = 0.16;
-    // controls.maxDistance = 0.20;
+    controls.minDistance = 1.5;
+    controls.maxDistance = 2;
 
     var pointLight = new THREE.PointLight(0xffffff, 1);
     pointLight.position.set(0, 1, 0);
@@ -78,6 +78,7 @@ const animate = () => {
     renderer.render(scene, camera);
 };
 
+
 function onLoaded(collada) {
     let objects = collada.scene;
 
@@ -97,13 +98,10 @@ var onError = function (data) {
     console.error(data);
 };
 
-const onClick = () => {
-    // console.log('document cliqué');
-};
 
 const onResize = () => {
-    width = Planet.value.clientWidth;
-    height = Planet.value.clientHeight;
+    width = Montre.value.clientWidth;
+    height = Montre.value.clientHeight;
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     updateRendererSize();
@@ -115,12 +113,11 @@ const saveCameraPosition = () => {
 };
 
 onMounted(() => {
-    width = Planet.value.clientWidth;
-    height = Planet.value.clientHeight;
+    width = Montre.value.clientWidth;
+    height = Montre.value.clientHeight;
     initScene();
     animate();
     window.addEventListener('resize', onResize);
-    document.addEventListener('click', onClick);
     saveCameraPosition();
 });
 
@@ -131,15 +128,17 @@ onUpdated(()=>{
 onBeforeUnmount(() => {
     cancelAnimationFrame(animationId);
     window.removeEventListener('resize', onResize);
-    document.removeEventListener('click', onClick);
 });
 </script>
 <template>
-    <div ref="Planet"  class="canvas">
+    <div ref="Montre"  class="canvas">
         <canvas class="canvas" ref="canvas" />
     </div>
 </template>
 
-<style  scoped>
-
+<style scoped>
+.canvas {
+    width: 100%;
+    height: 100%;
+}
 </style>

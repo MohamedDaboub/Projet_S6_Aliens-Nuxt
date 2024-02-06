@@ -167,7 +167,7 @@ const closeMobileMenu = () => {
       </div>
     </section>
     <section>
-      
+      <PlanetCanvas />      
     </section>
 
 </template>
