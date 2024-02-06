@@ -5,7 +5,7 @@ import { ref, onMounted, onBeforeUnmount,onUpdated } from 'vue';
 import * as THREE from 'three';
 
 const canvas = ref(null);
-const Montre = ref(null);
+const Planet = ref(null);
 var controls = null;
 var clock = new THREE.Clock();
 let scene = null;
@@ -13,15 +13,20 @@ let camera = null;
 let renderer = null;
 let animationId = null;
 var height, width;
+var loader
 
 const initScene = () => {
     scene = new THREE.Scene();
+
+    loader = new THREE.TextureLoader();
+    const skyTexture = loader.load('/img/2k_stars_milky_way.jpg');
+    scene.background = skyTexture;
 
     renderer = new THREE.WebGLRenderer();
     renderer.shadowMap.enabled=true; 
     renderer.shadowMap.type=THREE.PCFShadowMap;
     
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0); 
     directionalLight.position.set(1, 1, 1).normalize();
     scene.add(directionalLight);
 
@@ -59,7 +64,7 @@ const initScene = () => {
     scene.add(pointLight);
 
     clock.start();
-    var loader = new ColladaLoader();
+    loader = new ColladaLoader();
     loader.load('/models/Planet.dae', onLoaded, onProgress, onError);
 };
 
@@ -100,8 +105,8 @@ var onError = function (data) {
 
 
 const onResize = () => {
-    width = Montre.value.clientWidth;
-    height = Montre.value.clientHeight;
+    width = Planet.value.clientWidth;
+    height = Planet.value.clientHeight;
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     updateRendererSize();
@@ -113,8 +118,8 @@ const saveCameraPosition = () => {
 };
 
 onMounted(() => {
-    width = Montre.value.clientWidth;
-    height = Montre.value.clientHeight;
+    width = Planet.value.clientWidth;
+    height = Planet.value.clientHeight;
     initScene();
     animate();
     window.addEventListener('resize', onResize);
@@ -131,7 +136,7 @@ onBeforeUnmount(() => {
 });
 </script>
 <template>
-    <div ref="Montre"  class="canvas">
+    <div ref="Planet"  class="canvas">
         <canvas class="canvas" ref="canvas" />
     </div>
 </template>
@@ -140,5 +145,6 @@ onBeforeUnmount(() => {
 .canvas {
     width: 100%;
     height: 100%;
+    border-radius: 2px;
 }
 </style>
