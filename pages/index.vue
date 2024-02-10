@@ -85,18 +85,24 @@ const closeMobileMenu = () => {
           </RouterLink>
           <nav class="hidden md:flex items-center">
             <ul class="flex space-x-2">
-              <li>
-                <router-link to="/" class="text-white   focus:ring-4 focus:ring-primary-300 font-bold rounded-lg text-base px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none" aria-current="page">{{ isTranslated ? translateHex('486f6d65') : '486f6d65' }}</router-link>
-              </li>
-              <li>
-                <router-link to="/aliens" class="text-white   focus:ring-4 focus:ring-primary-300 font-bold rounded-lg text-base px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">{{ isTranslated ? translateHex('416c69656e73') : '416c69656e73' }}</router-link>
-              </li>
-              <li>
-                <router-link to="/aliens" class="text-white   focus:ring-4 focus:ring-primary-300 font-bold rounded-lg text-base px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">{{ isTranslated ? translateHex('416c69656e73') : '416c69656e73' }}</router-link>
-              </li>
-              <li>
-                <router-link to="/aliens" class="text-white   focus:ring-4 focus:ring-primary-300 font-bold rounded-lg text-base px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">{{ isTranslated ? translateHex('416c69656e73') : '416c69656e73' }}</router-link>
-              </li>
+              <li class="my-5">
+              <span v-if="isTranslated">
+                  <router-link to="/" class="my-3 text-white   focus:ring-4 focus:ring-primary-300 font-bold rounded-lg text-base px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">{{ isTranslated ? translateHex('486f6d65') : '486f6d65' }}</router-link>
+              </span>
+              <span v-else class=" my-3 text-white   focus:ring-4 focus:ring-primary-300 font-bold rounded-lg text-base px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">{{ isTranslated ? translateHex('486f6d65') : '486f6d65' }}</span>
+            </li>
+            <li class="my-5">
+              <span v-if="isTranslated">
+                  <router-link to="/aliens" class=" my-3 text-white   focus:ring-4 focus:ring-primary-300 font-bold rounded-lg text-base px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">{{ isTranslated ? translateHex('416c69656e73') : '416c69656e73' }}</router-link>
+              </span>
+              <span v-else class=" my-3 text-white   focus:ring-4 focus:ring-primary-300 font-bold rounded-lg text-base px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">{{ isTranslated ? translateHex('416c69656e73') : '416c69656e73' }}</span>
+            </li>
+            <li class="my-5">
+              <span v-if="isTranslated">
+                  <router-link to="/Contact" class=" my-3 text-white   focus:ring-4 focus:ring-primary-300 font-bold rounded-lg text-base px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">{{ isTranslated ? translateHex('436F6E74616374') : '436F6E74616374' }}</router-link>
+              </span>
+              <span v-else class=" my-3 text-white   focus:ring-4 focus:ring-primary-300 font-bold rounded-lg text-base px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">{{ isTranslated ? translateHex('436F6E74616374') : '436F6E74616374' }}</span>
+            </li>
             </ul>
           </nav>
           <div class="flex md:hidden items-center lg:order-2">
@@ -122,13 +128,22 @@ const closeMobileMenu = () => {
         <nav v-if="menuOuvert" class="md:hidden   w-full h-full border-gray-200 px-4 py-2.5 transition-transform transform  ">
           <ul class="flex flex-col mt-4 z-10 font-medium justify-center text-white text-center my-10 bg-dark-blue">
             <li class="my-5">
-              <router-link to="/aliens" class="nav-link">{{ isTranslated ? translateHex('486f6d65') : '486f6d65' }}</router-link>
+              <span v-if="isTranslated">
+                  <router-link to="/" class="text-xs my-3 nav-link">{{ isTranslated ? translateHex('486f6d65') : '486f6d65' }}</router-link>
+              </span>
+              <span v-else class="text-xs my-3 nav-link">{{ isTranslated ? translateHex('486f6d65') : '486f6d65' }}</span>
             </li>
             <li class="my-5">
-              <router-link to="/aliens" class="nav-link">{{ isTranslated ? translateHex('416c69656e73') : '416c69656e73' }}</router-link>
+              <span v-if="isTranslated">
+                  <router-link to="/aliens" class="text-xs my-3 nav-link">{{ isTranslated ? translateHex('416c69656e73') : '416c69656e73' }}</router-link>
+              </span>
+              <span v-else class="text-xs my-3 nav-link">{{ isTranslated ? translateHex('416c69656e73') : '416c69656e73' }}</span>
             </li>
             <li class="my-5">
-              <router-link to="/aliens" class="nav-link">{{ isTranslated ? translateHex('416c69656e73') : '416c69656e73' }}</router-link>
+              <span v-if="isTranslated">
+                  <router-link to="/Contact" class="text-xs my-3 nav-link">{{ isTranslated ? translateHex('436F6E74616374') : '436F6E74616374' }}</router-link>
+              </span>
+              <span v-else class="text-xs my-3 nav-link">{{ isTranslated ? translateHex('436F6E74616374') : '436F6E74616374' }}</span>
             </li>
           </ul>
         </nav>
@@ -167,16 +182,10 @@ const closeMobileMenu = () => {
         </div>
       </div>
     </section>
-    <router-link :to="{ path: '/aliens' }" v-on:click="handleLinkClick" class="text-xs my-3" :disabled="!isTranslated">Lien 1</router-link>
-    <p>cj</p>
-    <router-link to="/aliens" class="text-xs my-3" @click="handleLinkClick">Lien 1</router-link>
-    <p>lien</p>
-    <router-link to="/aliens" class="text-xs my-3" @click="handleLinkClick">Lien 1dddddddd</router-link>
-    <p>jbfj</p>
     <span v-if="isTranslated">
         <router-link to="/aliens" class="text-xs my-3">Lien 1</router-link>
-      </span>
-      <span v-else class="text-xs my-3">Lien 1</span>
+    </span>
+    <span v-else class="text-xs my-3">Lien 1</span>
     <section class="p-10" >
       <h2 :class="{ 'hex-Titre': !isTranslated } " class="lg:text-2xl text-lg md:font-bold text-white text-center my-10">{{ isTranslated ? translateHex('4f757220506c616e65742058796c6f72') : '4f757220506c616e65742058796c6f72' }}</h2>
       <div class="grid lg:grid-cols-2 grid-cols-1">
