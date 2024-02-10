@@ -55,8 +55,8 @@ const initScene = () => {
     controls.dampingFactor = 0.25;
     controls.screenSpacePanning = false;
     controls.maxPolarAngle = Math.PI / 2;
-    controls.minDistance = 1.5;
-    controls.maxDistance = 2;
+    controls.minDistance = 2;
+    controls.maxDistance = 3;
 
     var pointLight = new THREE.PointLight(0xffffff, 1);
     pointLight.position.set(0, 1, 0);
@@ -144,7 +144,7 @@ onBeforeUnmount(() => {
 <style scoped>
 .canvas {
     width: 100%;
-    height: 100%;
+    height: 90%;
     border-radius: 2px;
 }
 </style>
