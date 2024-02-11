@@ -3,10 +3,19 @@
   <section class="full">
     <div>
       <h1 class="font-bold text-2xl text-center py-10">Conversation</h1>
-      <p class="px-5">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto, nihil? Reprehenderit accusamus corporis reiciendis doloremque repudiandae iure, aliquid repellendus pariatur. Corrupti libero quaerat dolores aspernatur fugiat mollitia voluptate praesentium itaque.</p>
+      <p class="px-5 lg:mr-10">When you're ready to begin the conversation with the alien, simply click the button below. You'll have the opportunity to respond to the alien's message by clicking the same button. Remember, you have only one chance to reply to the alien's message. Additionally, it's important to understand that the fate of your planet rests in your hands.</p>
     </div>
-    <div class="p-10">
-      <button v-if="!conversationStarted" @click="startConversation">Commencer la conversation avec l'alien</button>
+    <div class="p-10 ">
+      <div  v-if="showStartButton" :class="{ 'hidden': conversationStarted || conversationFinished }">
+        <button v-if="!conversationStarted && !conversationFinished" @click="startConversation" class="btn1 text-center m-auto"> <span class="py-4 px-4">Commencer la conversation avec l'alien</span></button>
+      </div>
+      <div  v-else >
+        <div class="">
+          <p class="start text-lg font-bold py-4">You have already used your chance.</p>
+          <p class="start text-lg font-bold py-4">The final decision has been made.</p>
+          <h4 class="text-center font-bold md:text-xl text-base py-8">{{ finalMessage }}</h4>
+        </div>
+      </div>
       <div v-if="conversationStarted">
         <div class="border-2 p-8 rounded-md scroll-p-0.5 overflow-y-scroll taille">
           <div v-for="(message, index) in messages" :key="index">
@@ -26,13 +35,12 @@
             <div v-else-if="message.from === 'alien'">
               <div class="flex items-center gap-4">
                 <img src="/img/Space_Alien.webp" class="rounded-full w-12 h-12" alt="">
-                <p class="font-bold text-base">Alien</p>
+                <p class="font-bold text-base">Xylore</p>
               </div>
               <div v-if="message.translating">En cours de traduction...</div>
               <div v-if="message.hexContent" class="hex-content">
                 <div class="alien-message ">
                   <p class="hex-text">{{ message.hexContent }}</p>
-                  <p>en votre Langue</p>
                   <p>{{ message.content }}</p>
                 </div>
                 <div v-if="message.translation" class="translation">
@@ -42,13 +50,13 @@
             </div>
           </div>
           <div v-if="!conversationFinished && !showResponseOptions && !askedQuestion">
-            <button @click="sendMessage('We are Xylore. We come in peace and we want to buy this land: 27° 00 S, 13° 00 E. Enfortunately, we have lost our planet Xylor and we are offering a million Xixo for it. We re desperate and don\'t have much time. If you don\'t respond quickly, we\'ll go to war.')">Répondre</button>
+            <button class="btn1" @click="sendMessage('We are Xylore. We come in peace and we want to buy this land: 27° 00 S, 13° 00 E. Enfortunately, we have lost our planet Xylor and we are offering a million Xixo for it. We re desperate and don\'t have much time. If you don\'t respond quickly, we\'ll go to war.')"><span class="p-4">Hello Mister Alien i have make my dessison</span></button>
           </div>
-          <div v-if="showResponseOptions && !conversationFinished && askedQuestion" class="flex gap-4 text-center justify-center py-6">
-            <button @click="respondOption1" class="text-start btn "> <span class="p-3">Pourquoi voulez-vous venir sur Terre ?</span></button>
-            <button @click="respondOption2" class="text-start btn">Vous voulez la Terre ?</button>
+          <div v-if="showResponseOptions && !conversationFinished && askedQuestion" class="flex gap-4 text-center justify-center py-6 flex-wrap">
+            <button @click="respondOption1" class="text-start btn1 "> <span class="p-4">Pourquoi voulez-vous venir sur Terre ?</span></button>
+            <button @click="respondOption2" class="text-start btn1"><span class="p-4"> Vous voulez la Terre ?</span></button>
           </div>
-          <div v-if="showResponseOptions && !conversationFinished && !askedQuestion" class="flex gap-4 text-center justify-center py-6">
+          <div v-if="showResponseOptions && !conversationFinished && !askedQuestion" class="flex gap-4 text-center justify-center py-6 flex-wrap">
             <button @click="acceptOffer" class="text-start btn "> <span class="p-3">Laisser les aliens arriver en paix</span></button>
             <button @click="rejectOffer" class="text-start btn">Refuser l'offre</button>
           </div>
@@ -69,10 +77,28 @@ const showResponseOptions = ref(false)
 const finalMessage = ref('')
 const messages = ref([])
 let askedQuestion = false // Variable pour suivre si la question a déjà été posée
+const conversationDoneKey = 'conversationDone' // Clé pour stocker dans le localStorage
 
-function startConversation() {
-  conversationStarted.value = true
+// Vérifie si la conversation a déjà été faite
+const checkConversationStatus = () => {
+  if (localStorage.getItem(conversationDoneKey)) {
+    conversationStarted.value = false
+    conversationFinished.value = true
+    finalMessage.value = localStorage.getItem('finalMessage') // Charge le message final depuis le localStorage
+  }
 }
+
+const startConversation = () => {
+  conversationStarted.value = true
+  localStorage.setItem(conversationDoneKey, true) // Enregistre dans le localStorage que la conversation est terminée
+}
+
+const showStartButton = ref(true)
+
+onMounted(() => {
+  checkConversationStatus()
+  showStartButton.value = !conversationStarted.value && !conversationFinished.value
+})
 
 function receiveMessage(hexContent) {
   const content = hexToString(hexContent)
@@ -110,7 +136,12 @@ function acceptOffer() {
   sendMessage('We welcome you in peace, Xylore. You can settle on Earth.')
   receiveMessage("506f736974697665")
   conversationFinished.value = true
+  setTimeout(() => {
   finalMessage.value = "Les aliens ont accepté de venir en paix sur Terre."
+  localStorage.setItem(conversationDoneKey, true) // Enregistre dans le localStorage que la conversation est terminée
+  localStorage.setItem('finalMessage', finalMessage.value) // Enregistre le message final dans le localStorage
+  }, 2000)
+  
 }
 
 function rejectOffer() {
@@ -119,6 +150,8 @@ function rejectOffer() {
   conversationFinished.value = true
   setTimeout(() => {
     finalMessage.value = "Les aliens ont déclaré la guerre après le refus de l'offre."
+    localStorage.setItem(conversationDoneKey, true) // Enregistre dans le localStorage que la conversation est terminée
+    localStorage.setItem('finalMessage', finalMessage.value) // Enregistre le message final dans le localStorage
   }, 2000)
 }
 
@@ -137,9 +170,15 @@ function hexToString(hex) {
   }
   return str
 }
+if (localStorage.getItem(conversationDoneKey)) {
+  conversationStarted.value = false
+}
 </script>
 
 <style scoped>
+.hidden {
+  display: none;
+}
 .full{
   height: 90dvh;
   height: 100%;
@@ -198,6 +237,19 @@ font-size: 14px;
   background-origin: border-box;
   background-clip: content-box, border-box;
 }
+.btn1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-size: 300% 300%;
+  border-radius: 5rem;
+  transition: 0.5s;
+  border: double 4px transparent;
+  background-image: linear-gradient(#212121, #212121),  linear-gradient(137.48deg, #A7347A 10%,#1043F8 45%, #A7347A 67%, #1043F8 87%);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+}
 
 .btn:hover {
   z-index: 1;
@@ -207,11 +259,18 @@ font-size: 14px;
 .btn:hover {
   transform: scale(1.1)
 }
+.btn1:hover {
+  z-index: 1;
+  background-color: #212121;
+}
+
+.btn1:hover {
+  transform: scale(1.1)
+}
 
 
 .btn:active {
     background: linear-gradient(75deg, #a7347a 0%,  #1043f8 360%);
 }
-
 
   </style>
