@@ -117,7 +117,7 @@ const closeMobileMenu = () => {
           </div>
         </div>
         <nav v-if="menuOuvert" class="md:hidden   w-full h-full border-gray-200 px-4 py-2.5 transition-transform transform  ">
-          <ul class="flex flex-col mt-4 z-10 font-medium justify-center text-white text-center my-10 bg-dark-blue">
+          <ul class="flex flex-col mt-4 z-10 font-medium justify-center text-white text-center my-10 ">
             <li class="my-5">
               <span v-if="isTranslated">
                   <router-link to="/" class="text-xs my-3 nav-link">{{ isTranslated ? translateHex('486f6d65') : '486f6d65' }}</router-link>
