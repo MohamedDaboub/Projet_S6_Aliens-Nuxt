@@ -8,7 +8,7 @@ const countdown = ref({
     seconds: 0
 });
 
-const arrivalDate = new Date('2024-02-15T12:00:00'); // Remplacez cette date par la date réelle d'arrivée
+const arrivalDate = new Date('2024-02-20T12:00:00'); // Remplacez cette date par la date réelle d'arrivée
 
 const updateCountdown = () => {
     const now = new Date();
