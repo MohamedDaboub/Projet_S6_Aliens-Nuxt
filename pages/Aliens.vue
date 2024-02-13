@@ -1,11 +1,17 @@
 <script setup>
-
+const env = useRuntimeConfig()
+const { data: planets } = await useAsyncData('planets', () => {
+  return $fetch(env.public.apiUrl + '/planets')
+})
+console.log(planets)
 </script>
 
 <template>
     <Header/>
     <section>
-        <h1 class=" text-xl md:text-2xl text-center py-10 font-bold">Our Story: The Saga of the Xylores</h1>
+        <h1 class=" text-xl md:text-2xl text-center py-10 font-bold">
+          Our Story: The Saga of the Xylores
+        </h1>
     </section>
     <section>
         <p class="text-base px-6 py-7">Welcome to the captivating saga of the Xylores, a species whose journey traverses the cosmos and spans the annals of time. From the distant reaches of space to the heart of the universe, our story unfolds with tales of triumph, tragedy, and the enduring quest for survival.</p>
@@ -16,31 +22,32 @@
             <div class="mx-5 ">
                 <p class="py-2  ">
                     <span class="font-bold">Name:</span> 
-                    Xylor
+                    <!-- Xylor  -->
+                    {{ planets[0].name }}
                 </p>
                 <p class="py-2">
                     <span class="font-bold"> Diameter: </span>
-                    Approximately 12,000 kilometers
+                    {{ planets[0].diameter }}
                 </p>
                 <p class="py-2">
                     <span class="font-bold">Distance from Sun: </span>
-                    100 million kilometers
+                    {{ planets[0].distance_from_sun }}
                 </p>
                 <p class="py-2">
                     <span class="font-bold">Number of Moons: </span>
-                    2 (Lunaris and Nocturna)
+                    {{ planets[0].number_of_moons }}
                 </p>
                 <p class="py-2">
                     <span class="font-bold">Population:</span> 
-                    Varied throughout history, reaching its peak at 10 billion inhabitants before the cataclysmic events.
+                    {{ planets[0].Population }}
                 </p>
                 <p class="py-2"> 
                     <span class="font-bold">Atmosphere: </span>
-                    Previously composed of a breathable mix of oxygen and nitrogen, now heavily polluted and toxic.
+                    {{ planets[0].Atmosphere }}
                 </p>
                 <p class="py-2">
                     <span class="font-bold">Climate:</span>
-                    Once diverse with lush forests, vast oceans, and sprawling plains, now ravaged by extreme weather patterns and environmental degradation.
+                    {{ planets[0].Climate }}
                 </p>
             </div>
         </div>

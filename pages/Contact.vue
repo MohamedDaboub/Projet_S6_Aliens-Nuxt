@@ -52,11 +52,11 @@
           <div v-if="!conversationFinished && !showResponseOptions && !askedQuestion">
             <button class="btn1" @click="sendMessage('We are Xylore. We come in peace and we want to buy this land: 27° 00 S, 13° 00 E. Enfortunately, we have lost our planet Xylor and we are offering a million Xixo for it. We re desperate and don\'t have much time. If you don\'t respond quickly, we\'ll go to war.')"><span class="p-4">Hello Mister Alien i have make my dessison</span></button>
           </div>
-          <div v-if="showResponseOptions && !conversationFinished && askedQuestion" class="flex gap-4 text-center justify-center py-6 flex-wrap">
+          <div v-if="!responseGiven && !conversationFinished && showResponseOptions && askedQuestion" class="flex gap-4 text-center justify-center py-6 flex-wrap">
             <button @click="respondOption1" class="text-start btn1 "> <span class="p-4">Pourquoi voulez-vous venir sur Terre ?</span></button>
             <button @click="respondOption2" class="text-start btn1"><span class="p-4"> Vous voulez la Terre ?</span></button>
           </div>
-          <div v-if="showResponseOptions && !conversationFinished && !askedQuestion" class="flex gap-4 text-center justify-center py-6 flex-wrap">
+          <div v-if="responseGiven && !conversationFinished" class="flex gap-4 text-center justify-center py-6 flex-wrap">
             <button @click="acceptOffer" class="text-start btn "> <span class="p-3">Laisser les aliens arriver en paix</span></button>
             <button @click="rejectOffer" class="text-start btn">Refuser l'offre</button>
           </div>
@@ -78,6 +78,7 @@ const finalMessage = ref('')
 const messages = ref([])
 let askedQuestion = false // Variable pour suivre si la question a déjà été posée
 const conversationDoneKey = 'conversationDone' // Clé pour stocker dans le localStorage
+const responseGiven = ref(false); 
 
 // Vérifie si la conversation a déjà été faite
 const checkConversationStatus = () => {
@@ -106,8 +107,10 @@ function receiveMessage(hexContent) {
     messages.value.push({ content, hexContent, from: 'alien', translating: false })
     if (!askedQuestion) {
       askedQuestion = true
+    } else if (!showResponseOptions.value) {
+      showResponseOptions.value = true; // Afficher les boutons acceptOffer et rejectOffer si l'utilisateur n'a pas encore choisi une option
     }
-  }, 500)
+  }, 100)
 }
 function sendMessage(content) {
   const hexContent = stringToHex(content)
@@ -121,20 +124,20 @@ function sendMessage(content) {
     }
   }, 500)
 }
-
 function respondOption1() {
-  sendMessage('Je viens sur Terre.')
-  askedQuestion = false
+  sendMessage('Je viens sur Terre.');
+  receiveMessage("4f6b61792c207468616e6b20796f752c2045617274686c696e672c20666f7220616363657074696e67207573");
+  responseGiven.value = true; // Définir responseGiven à true lorsque l'utilisateur répond
 }
 
 function respondOption2() {
-  sendMessage('Je ne viens pas sur Terre.')
-  askedQuestion = false
+  sendMessage('Je ne viens pas sur Terre.');
+  receiveMessage("4f6b61792c207468616e2c20666f7220616363657074696e67207573");
+  responseGiven.value = true; // Définir responseGiven à true lorsque l'utilisateur répond
 }
-
 function acceptOffer() {
   sendMessage('We welcome you in peace, Xylore. You can settle on Earth.')
-  receiveMessage("506f736974697665")
+  receiveMessage("4f6b61792c207468616e6b20796f752c2045617274686c696e672c20666f7220616363657074696e67207573")
   conversationFinished.value = true
   setTimeout(() => {
   finalMessage.value = "Les aliens ont accepté de venir en paix sur Terre."
@@ -146,7 +149,7 @@ function acceptOffer() {
 
 function rejectOffer() {
   sendMessage('Nous ne vendrons pas notre planète. Vous ne pouvez pas venir ici.')
-  receiveMessage("416c6f72732c20616374756d2c206c61206775757272")
+  receiveMessage("534f20495420574152")
   conversationFinished.value = true
   setTimeout(() => {
     finalMessage.value = "Les aliens ont déclaré la guerre après le refus de l'offre."

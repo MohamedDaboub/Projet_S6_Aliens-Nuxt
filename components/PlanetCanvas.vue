@@ -59,7 +59,7 @@ const initScene = () => {
     controls.maxDistance = 3;
 
     var pointLight = new THREE.PointLight(0xffffff, 1);
-    pointLight.position.set(0, 1, 0);
+    pointLight.position.set(1, 1, 0);
     pointLight.castShadow = true;
     scene.add(pointLight);
 
