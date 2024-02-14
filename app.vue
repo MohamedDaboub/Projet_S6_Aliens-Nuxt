@@ -1,11 +1,8 @@
 <template>
   <div>
-    <!-- Overlay avec le GIF de chargement -->
     <div v-if="isLoading" class="loading-overlay">
       <img src="/img/Space_Loading.gif" alt="Loading..." />
     </div>
-    
-    <!-- Contenu principal de la page -->
     <div v-if="!isLoading">
       <NuxtPage/>
     </div>
@@ -45,7 +42,7 @@ body {
   scroll-behavior: smooth;
 }
 
-body::before {
+body::after {
   content: "";
   position: absolute;
   top: 0;
@@ -56,7 +53,7 @@ body::before {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat; 
-  opacity: 0.15; 
+  opacity: 0.20; 
   z-index: -100; 
 }
 .loading-overlay img {

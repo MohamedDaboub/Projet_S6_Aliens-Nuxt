@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
-
 const countdown = ref({
     days: 0,
     hours: 0,
@@ -13,7 +12,6 @@ const arrivalDate = new Date('2024-02-20T12:00:00'); // Remplacez cette date par
 const updateCountdown = () => {
     const now = new Date();
     const difference = arrivalDate - now;
-
     countdown.value.days = Math.floor(difference / (1000 * 60 * 60 * 24));
     countdown.value.hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     countdown.value.minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
@@ -36,13 +34,17 @@ const hexText = ref("4772656574696e67732c2045617274686d616e2e2057652061726520587
 const translatedText = ref(null);
 const isTranslated = ref(false);
 const isLinkEnabled = ref(false);
+const isDecodingInProgress = ref(false);
 
 const translateText = () => {
   if (!isTranslated.value) {
-    translatedText.value = translateHex(hexText.value);
-    isTranslated.value = true;
-    localStorage.setItem('isTranslated', 'true');
-    isLinkEnabled.value = true; // Activer le lien une fois que la traduction est terminée
+    isDecodingInProgress.value = true; // Démarre l'indicateur de décodage en cours
+    setTimeout(() => { // Simulez un délai de décodage
+      translatedText.value = translateHex(hexText.value);
+      isTranslated.value = true;
+      localStorage.setItem('isTranslated', 'true');
+      isDecodingInProgress.value = false; // Arrête l'indicateur de décodage en cours
+    }, 2000); // 2 secondes pour simuler le décodage
   }
 };
 
@@ -146,6 +148,11 @@ const closeMobileMenu = () => {
         <h1 :class="{ 'hex-Titre': !isTranslated } " class="md:text-lg text-base py-2 mx-1 font-bold">{{ isTranslated ? translatedText : hexText }}</h1>
         <h3 :class="{ 'hex-Titre': !isTranslated } " class="md:text-lg text-base py-2 mx-1 font-bold">{{ isTranslated ? translateHex('57652072652064657370657261746520616e6420646f6e27742068617665206d7563682074696d652e20496620796f7520646f6e277420726573706f6e6420717569636b6c792c20776527726c6c20676f20746f207761722e') : '57652072652064657370657261746520616e6420646f6e27742068617665206d7563682074696d652e20496620796f7520646f6e277420726573706f6e6420717569636b6c792c20776527726c6c20676f20746f207761722e' }}</h3>
       </div>
+      <div v-show="isDecodingInProgress" class="bug-message-container">
+      <div v-show="isDecodingInProgress" class="bug-message-content">
+        <p v-show="isDecodingInProgress" class="text-xs my-3">Texte en cours de décodage...</p>
+      </div>
+    </div>
       <div>
         <button :class="{ 'hex-text': !isTranslated } " @click="translateText" v-show="!isTranslated" class="text-xs my-3">5472616475697265206c65207465787465</button>
         <button v-show="isTranslated" class="text-xs my-3 font-bold">
@@ -335,7 +342,28 @@ button:active {
     background-position: center;
     z-index: -10;
 }
+/* */
+.bug-message-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 999;
+  }
 
+  .bug-message-content {
+    text-align: center;
+  }
+
+  /* Affichage du message de bug */
+  .bug-message-show {
+    display: block;
+  }
 /* ----------------------------------------------------- */
 .btn {
   display: flex;
