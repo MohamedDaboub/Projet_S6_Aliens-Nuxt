@@ -30,14 +30,14 @@
                   <p class="hex-text text-start">{{ message.hexContent }}</p>
                 </div>
               </div>
-              <div v-if="message.translating">En cours de traduction...</div>
+              <div v-if="message.translating">Currently in translation...</div>
             </div>
             <div v-else-if="message.from === 'alien'">
               <div class="flex items-center gap-4">
                 <img src="/img/Space_Alien.webp" class="rounded-full w-12 h-12" alt="">
                 <p class="font-bold text-base">Xylore</p>
               </div>
-              <div v-if="message.translating">En cours de traduction...</div>
+              <div v-if="message.translating">Currently in translation...</div>
               <div v-if="message.hexContent" class="hex-content">
                 <div class="alien-message ">
                   <p class="hex-text">{{ message.hexContent }}</p>
@@ -50,15 +50,15 @@
             </div>
           </div>
           <div v-if="!conversationFinished && !showResponseOptions && !askedQuestion">
-            <button class="btn1" @click="sendMessage('We are Xylore. We come in peace and we want to buy this land: 27° 00 S, 13° 00 E. Enfortunately, we have lost our planet Xylor and we are offering a million Xixo for it. We re desperate and don\'t have much time. If you don\'t respond quickly, we\'ll go to war.')"><span class="p-4">Hello Mister Alien i have make my dessison</span></button>
+            <button class="btn1" @click="sendMessage('Greetings, extraterrestrial being. I have reached a decision.')"><span class="p-4">Greetings, extraterrestrial being. I have reached a decision.</span></button>
           </div>
           <div v-if="!responseGiven && !conversationFinished && showResponseOptions && askedQuestion" class="flex gap-4 text-center justify-center py-6 flex-wrap">
-            <button @click="respondOption1" class="text-start btn1 "> <span class="p-4">Pourquoi voulez-vous venir sur Terre ?</span></button>
-            <button @click="respondOption2" class="text-start btn1"><span class="p-4"> Vous voulez la Terre ?</span></button>
+            <button @click="respondOption1" class="text-start btn1 "> <span class="p-4">What is your motive for seeking to visit Earth?</span></button>
+            <button @click="respondOption2" class="text-start btn1"><span class="p-4"> Could you elaborate on your reasons for desiring to journey to Earth?</span></button>
           </div>
           <div v-if="responseGiven && !conversationFinished" class="flex gap-4 text-center justify-center py-6 flex-wrap">
-            <button @click="acceptOffer" class="text-start btn "> <span class="p-3">Laisser les aliens arriver en paix</span></button>
-            <button @click="rejectOffer" class="text-start btn">Refuser l'offre</button>
+            <button @click="acceptOffer" class="text-start btn "> <span class="p-3">Let the aliens arrive in peace</span></button>
+            <button @click="rejectOffer" class="text-start btn">Refuse offer</button>
           </div>
           <div v-if="conversationFinished" class="text-center font-bold md:text-xl text-base py-8 ">
             <p>{{ finalMessage }}</p>
@@ -76,22 +76,21 @@ const conversationFinished = ref(false)
 const showResponseOptions = ref(false)
 const finalMessage = ref('')
 const messages = ref([])
-let askedQuestion = false // Variable pour suivre si la question a déjà été posée
-const conversationDoneKey = 'conversationDone' // Clé pour stocker dans le localStorage
+let askedQuestion = false
+const conversationDoneKey = 'conversationDone'
 const responseGiven = ref(false); 
 
-// Vérifie si la conversation a déjà été faite
 const checkConversationStatus = () => {
   if (localStorage.getItem(conversationDoneKey)) {
     conversationStarted.value = false
     conversationFinished.value = true
-    finalMessage.value = localStorage.getItem('finalMessage') // Charge le message final depuis le localStorage
+    finalMessage.value = localStorage.getItem('finalMessage')
   }
 }
 
 const startConversation = () => {
   conversationStarted.value = true
-  localStorage.setItem(conversationDoneKey, true) // Enregistre dans le localStorage que la conversation est terminée
+  localStorage.setItem(conversationDoneKey, true)
 }
 
 const showStartButton = ref(true)
@@ -108,7 +107,7 @@ function receiveMessage(hexContent) {
     if (!askedQuestion) {
       askedQuestion = true
     } else if (!showResponseOptions.value) {
-      showResponseOptions.value = true; // Afficher les boutons acceptOffer et rejectOffer si l'utilisateur n'a pas encore choisi une option
+      showResponseOptions.value = true; 
     }
   }, 100)
 }
@@ -118,43 +117,43 @@ function sendMessage(content) {
 
   setTimeout(() => {
     messages.value[messages.value.length - 1].translating = false
-    if (content.includes('We are Xylore')) {
-      receiveMessage("45")
+    if (content.includes('Greetings')) {
+      receiveMessage("41682c2045617274686d616e2c204920617761697420796f7572206465636973696f6e207769746820616e74696369706174696f6e2e")
       showResponseOptions.value = true
     }
   }, 500)
 }
 function respondOption1() {
-  sendMessage('Je viens sur Terre.');
-  receiveMessage("4f6b61792c207468616e6b20796f752c2045617274686c696e672c20666f7220616363657074696e67207573");
-  responseGiven.value = true; // Définir responseGiven à true lorsque l'utilisateur répond
+  sendMessage('What is your motive for seeking to visit Earth?');
+  receiveMessage("5765206f627365727665207468617420706c616e657420456172746820697320746865206f6e6c79206b6e6f776e2063656c65737469616c20626f6479207768657265206c696665206578697374732e205468697320697320776879207765206861766520636f6d6520746f206578706c6f72652074686520706f73736962696c697479206f66206c696665206f6e2045617274682e");
+  responseGiven.value = true;
 }
 
 function respondOption2() {
-  sendMessage('Je ne viens pas sur Terre.');
-  receiveMessage("4f6b61792c207468616e2c20666f7220616363657074696e67207573");
-  responseGiven.value = true; // Définir responseGiven à true lorsque l'utilisateur répond
+  sendMessage('Could you elaborate on your reasons for desiring to journey to Earth?');
+  receiveMessage("546F206578706C6F72652C206C6561726E2C20616E6420666F73746572207065616365206265747765656E206F757220636976696C697A6174696F6E732E");
+  responseGiven.value = true;
 }
 function acceptOffer() {
   sendMessage('We welcome you in peace, Xylore. You can settle on Earth.')
   receiveMessage("4f6b61792c207468616e6b20796f752c2045617274686c696e672c20666f7220616363657074696e67207573")
   conversationFinished.value = true
   setTimeout(() => {
-  finalMessage.value = "Les aliens ont accepté de venir en paix sur Terre."
-  localStorage.setItem(conversationDoneKey, true) // Enregistre dans le localStorage que la conversation est terminée
-  localStorage.setItem('finalMessage', finalMessage.value) // Enregistre le message final dans le localStorage
+  finalMessage.value = "The aliens have agreed to come to Earth in peace."
+  localStorage.setItem(conversationDoneKey, true)
+  localStorage.setItem('finalMessage', finalMessage.value) 
   }, 2000)
   
 }
 
 function rejectOffer() {
-  sendMessage('Nous ne vendrons pas notre planète. Vous ne pouvez pas venir ici.')
+  sendMessage("We won't sell our planet. You can't come here.")
   receiveMessage("534f20495420574152")
   conversationFinished.value = true
   setTimeout(() => {
-    finalMessage.value = "Les aliens ont déclaré la guerre après le refus de l'offre."
-    localStorage.setItem(conversationDoneKey, true) // Enregistre dans le localStorage que la conversation est terminée
-    localStorage.setItem('finalMessage', finalMessage.value) // Enregistre le message final dans le localStorage
+    finalMessage.value = "The aliens declared war after the offer was refused."
+    localStorage.setItem(conversationDoneKey, true)
+    localStorage.setItem('finalMessage', finalMessage.value) 
   }, 2000)
 }
 
@@ -275,27 +274,5 @@ font-size: 14px;
 .full{
   height: 90dvh;
   height: 100%;
-}
-body{
-  font-family: 'Orbitron', sans-serif;
-  position: relative;
-  background-color: #070B1E;
-  color: #fff;
-  scroll-behavior: smooth;
-
-}
-body::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-image: url('../assets/Space_Background.webp'); 
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat; 
-  opacity: 0.25; 
-  z-index: -900; 
 }
   </style>

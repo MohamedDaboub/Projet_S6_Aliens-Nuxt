@@ -6,9 +6,7 @@ const countdown = ref({
     minutes: 0,
     seconds: 0
 });
-
-const arrivalDate = new Date('2024-02-20T12:00:00'); // Remplacez cette date par la date réelle d'arrivée
-
+const arrivalDate = new Date('2024-12-20T12:00:00'); 
 const updateCountdown = () => {
     const now = new Date();
     const difference = arrivalDate - now;
@@ -38,13 +36,13 @@ const isDecodingInProgress = ref(false);
 
 const translateText = () => {
   if (!isTranslated.value) {
-    isDecodingInProgress.value = true; // Démarre l'indicateur de décodage en cours
-    setTimeout(() => { // Simulez un délai de décodage
+    isDecodingInProgress.value = true; 
+    setTimeout(() => {
       translatedText.value = translateHex(hexText.value);
       isTranslated.value = true;
       localStorage.setItem('isTranslated', 'true');
-      isDecodingInProgress.value = false; // Arrête l'indicateur de décodage en cours
-    }, 2000); // 2 secondes pour simuler le décodage
+      isDecodingInProgress.value = false; 
+    }, 2000);
   }
 };
 
@@ -62,7 +60,7 @@ onMounted(() => {
   if (translationStatus === 'true') {
     isTranslated.value = true;
     translatedText.value = translateHex(hexText.value);
-    isLinkEnabled.value = true; // Activer le lien si la traduction est déjà faite sur une page précédente
+    isLinkEnabled.value = true;
   }
 });
 
@@ -159,8 +157,7 @@ const closeMobileMenu = () => {
           <a href="#PlanetXylor">
             {{ isTranslated ? translateHex('506c616e65742058796c6f72') : '506c616e65742058796c6f72' }}
           </a>
-        </button>
-        
+        </button>  
       </div>
     </section>
     <section class="text-white text-center my-10 ">
@@ -308,7 +305,6 @@ button:before {
   bottom: -5px;
   z-index: -1;
   background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
-  /* background: linear-gradient(0deg, #1043F8, #A7347A); */
   background-size: 400%;
   border-radius: 35px;
   transition: 1s;
@@ -320,7 +316,6 @@ button:hover::before {
 
 button:active {
   background: linear-gradient(0deg, #1043F8, #A7347A);
-  /* background: linear-gradient(32deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4); */
 }
 
 .gradient-marron-f {
@@ -406,12 +401,10 @@ strong {
 #glow {
   position: absolute;
   display: flex;
-  /* width: 12rem; */
 }
 
 .circle {
   width: 100%;
-  /* height: 30px; */
   filter: blur(2rem);
   animation: pulse_3011 4s infinite;
   z-index: -1;
@@ -526,27 +519,5 @@ strong {
     transform: scale(0.75);
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
   }
-}
-body {
-  font-family: 'Orbitron', sans-serif;
-  position: relative;
-  background-color: #070B1E;
-  color: #fff;
-  scroll-behavior: smooth;
-}
-
-body::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-image: url('img/Space_Background.webp'); 
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat; 
-  opacity: 0.25; 
-  z-index: -900; 
 }
 </style>

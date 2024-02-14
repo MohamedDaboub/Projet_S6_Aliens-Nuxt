@@ -19,7 +19,7 @@ const initScene = () => {
     scene = new THREE.Scene();
 
     loader = new THREE.TextureLoader();
-    const skyTexture = loader.load('/img/Space_3d.gif');
+    const skyTexture = loader.load('/img/2k_stars_milky_way.jpg');
     scene.background = skyTexture;
 
     renderer = new THREE.WebGLRenderer();

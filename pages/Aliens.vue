@@ -133,12 +133,10 @@ strong {
 #glow {
   position: absolute;
   display: flex;
-  /* width: 12rem; */
 }
 
 .circle {
   width: 100%;
-  /* height: 30px; */
   filter: blur(2rem);
   animation: pulse_3011 4s infinite;
   z-index: -1;
@@ -253,27 +251,5 @@ strong {
     transform: scale(0.75);
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
   }
-}
-body {
-  font-family: 'Orbitron', sans-serif;
-  position: relative;
-  background-color: #070B1E;
-  color: #fff;
-  scroll-behavior: smooth;
-}
-
-body::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-image: url('img/Space_Background.webp'); 
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat; 
-  opacity: 0.25; 
-  z-index: -900; 
 }
 </style>
