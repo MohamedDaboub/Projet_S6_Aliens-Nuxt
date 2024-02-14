@@ -146,7 +146,7 @@ const closeMobileMenu = () => {
         <h1 :class="{ 'hex-Titre': !isTranslated } " class="md:text-lg text-base py-2 mx-1 font-bold">{{ isTranslated ? translatedText : hexText }}</h1>
         <h3 :class="{ 'hex-Titre': !isTranslated } " class="md:text-lg text-base py-2 mx-1 font-bold">{{ isTranslated ? translateHex('57652072652064657370657261746520616e6420646f6e27742068617665206d7563682074696d652e20496620796f7520646f6e277420726573706f6e6420717569636b6c792c20776527726c6c20676f20746f207761722e') : '57652072652064657370657261746520616e6420646f6e27742068617665206d7563682074696d652e20496620796f7520646f6e277420726573706f6e6420717569636b6c792c20776527726c6c20676f20746f207761722e' }}</h3>
       </div>
-        <p v-show="isDecodingInProgress" class="text-xs my-3 z-10 bg-black p-4 rounded-md bug-message-show  ">
+        <p v-show="isDecodingInProgress" class="text-xs my-1 z-10 bg-black p-2 rounded-md bug-message-show  ">
             Texte en cours de décodage...
         </p>
       <div>
