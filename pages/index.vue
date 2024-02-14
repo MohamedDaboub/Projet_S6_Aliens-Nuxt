@@ -527,4 +527,26 @@ strong {
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
   }
 }
+body {
+  font-family: 'Orbitron', sans-serif;
+  position: relative;
+  background-color: #070B1E;
+  color: #fff;
+  scroll-behavior: smooth;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: url('img/Space_Background.webp'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; 
+  opacity: 0.25; 
+  z-index: -900; 
+}
 </style>

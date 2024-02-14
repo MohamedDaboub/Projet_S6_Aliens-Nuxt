@@ -33,7 +33,6 @@ onMounted(() => {
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
-
 body {
   font-family: 'Orbitron', sans-serif;
   position: relative;
@@ -42,7 +41,7 @@ body {
   scroll-behavior: smooth;
 }
 
-body::after {
+body::before {
   content: "";
   position: absolute;
   top: 0;
@@ -53,8 +52,8 @@ body::after {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat; 
-  opacity: 0.20; 
-  z-index: -100; 
+  opacity: 0.25; 
+  z-index: -900; 
 }
 .loading-overlay img {
   width: 100%;
