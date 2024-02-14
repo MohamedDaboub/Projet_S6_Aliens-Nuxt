@@ -48,7 +48,7 @@ body::before {
   right: 0;
   bottom: 0;
   left: 0;
-  background-image: url('img/Space_Background.webp'); 
+  background-image: url('./assets/Space_Background.webp'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat; 

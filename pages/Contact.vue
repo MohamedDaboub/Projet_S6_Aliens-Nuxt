@@ -182,10 +182,7 @@ if (localStorage.getItem(conversationDoneKey)) {
 .hidden {
   display: none;
 }
-.full{
-  height: 90dvh;
-  height: 100%;
-}
+
 .taille{
   height: 750px;
 }
@@ -275,14 +272,18 @@ font-size: 14px;
 .btn:active {
     background: linear-gradient(75deg, #a7347a 0%,  #1043f8 360%);
 }
-body {
+.full{
+  height: 90dvh;
+  height: 100%;
+}
+body{
   font-family: 'Orbitron', sans-serif;
   position: relative;
   background-color: #070B1E;
   color: #fff;
   scroll-behavior: smooth;
-}
 
+}
 body::before {
   content: "";
   position: absolute;
@@ -290,7 +291,7 @@ body::before {
   right: 0;
   bottom: 0;
   left: 0;
-  background-image: url('img/Space_Background.webp'); 
+  background-image: url('../assets/Space_Background.webp'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat; 
